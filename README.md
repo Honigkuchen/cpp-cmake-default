@@ -1,11 +1,7 @@
-# The Coding Library
+# C++ cmake default repository
 
-This is a collection of coding algorithms.
-Algorithms were mostly derived from Wikipedia and other sources.
-This repository originates as a coding challenge for myself.
-
-None of these algorithms is designed/optimized to be actually fast or efficient.
+This is my C++ cmake-build default repository which I use for pretty much all my personal projects.
 
 # Credits
 Author: Jonas Haubold
-2022
+Year: 2022
