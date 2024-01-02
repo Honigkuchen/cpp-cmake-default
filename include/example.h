@@ -5,7 +5,7 @@
 
 namespace cpp_cmake_default
 {
-std::string hello_world()
+[[nodiscard]] constexpr auto hello_world() noexcept
 {
   return "Hello World!";
 }
