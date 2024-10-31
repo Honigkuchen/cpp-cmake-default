@@ -1,6 +1,7 @@
-add_executable(CPP_CMAKE_DEFAULT_TEST
-  example.cc)
-target_link_libraries(CPP_CMAKE_DEFAULT_TEST GTest::gtest_main)
-# add_test(NAME unit_test COMMAND unit_test)
+enable_testing()
+find_package(GTest REQUIRED)
+
+add_executable(${PROJECT_NAME}_test example.cpp)
+target_link_libraries(${PROJECT_NAME}_test GTest::gtest GTest::gtest_main)
 include(GoogleTest)
-gtest_discover_tests(CPP_CMAKE_DEFAULT_TEST)
+gtest_discover_tests(${PROJECT_NAME}_test)

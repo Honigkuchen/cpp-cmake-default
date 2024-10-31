@@ -1,29 +1,11 @@
 cmake_minimum_required(VERSION 3.10)
 
 project(cpp-cmake-default VERSION 1.0.0 LANGUAGES CXX)
+find_package(fmt REQUIRED)
 
-set(CMAKE_CXX_STANDARD 20)
-
-include_directories(include)
-add_subdirectory(src)
-
-option(TESTING_ENABLED "Enable testing" ON)
-
-if(${TESTING_ENABLED})
-  enable_testing()
-
-  # Download and unpack googletest at configure time
-  include(FetchContent)
-  FetchContent_Declare(
-    googletest
-    GIT_REPOSITORY https://github.com/google/googletest.git
-    GIT_TAG release-1.12.1
-  )
-
-  # Prevent overriding the parent project's compiler/linker
-  # settings on Windows
-  set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-  FetchContent_MakeAvailable(googletest)
-  
-  add_subdirectory(test)
-endif()
+add_executable(${PROJECT_NAME} src/main.cpp)
+set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 20)
+target_include_directories(${PROJECT_NAME} PRIVATE include)
+target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -Wpedantic -Werror -Wconversion)
+target_link_libraries(${PROJECT_NAME} PRIVATE fmt::fmt)
+add_subdirectory(test)
