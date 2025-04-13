@@ -15,19 +15,27 @@ env:
   BUILD_TYPE: Release
 
 jobs:
-  build_cpp20:
-    # The CMake configure and build commands are platform agnostic and should work equally well on Windows or Mac.
-    # You can convert this to a matrix build if you need cross-platform coverage.
-    # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
+  build_devcontainer:
     runs-on: ubuntu-latest
 
     steps:
     - name: Build devcontainer
       uses: devcontainers/ci@v0.2
+      cacheFrom: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:latest
       with:
-        push: never
+        push: true
         imageName: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:latest
 
+  build_cpp20:
+    # The CMake configure and build commands are platform agnostic and should work equally well on Windows or Mac.
+    # You can convert this to a matrix build if you need cross-platform coverage.
+    # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:latest
+      options: --user root
+
+    steps:
     - name: Checkout code
       uses: actions/checkout@v4
     
