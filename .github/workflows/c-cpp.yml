@@ -23,7 +23,6 @@ jobs:
       uses: devcontainers/ci@v0.2
       with:
         imageName: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:latest
-        cacheFrom: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:latest
         push: always
 
   build_cpp20:
