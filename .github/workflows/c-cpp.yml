@@ -21,10 +21,10 @@ jobs:
     steps:
     - name: Build devcontainer
       uses: devcontainers/ci@v0.2
-      cacheFrom: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:latest
       with:
-        push: true
         imageName: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:latest
+        cacheFrom: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:latest
+        push: always
 
   build_cpp20:
     runs-on: ubuntu-latest
