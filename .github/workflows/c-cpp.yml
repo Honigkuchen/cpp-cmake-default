@@ -22,11 +22,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Build devcontainer
+      uses: devcontainers/ci@v0.2
+      with:
+        push: never
+        imageName: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:latest
+
     - name: Checkout code
       uses: actions/checkout@v4
     
     - name: Build
-      uses: devcontainers/ci@v0.2
+      uses: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:latest
       with:
         runCmd: |
           cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_CXX_STANDARD=20
