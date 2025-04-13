@@ -9,29 +9,19 @@ on:
   pull_request:
     branches:
       - main
+  paths:
+    - 'CMakeLists.txt'
+    - '**/*.cpp'
+    - '**/*.h'
+    - '**/*.hpp'
+    - '**/*.cxx'
+    - '**/*.c'
 
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
   BUILD_TYPE: Release
 
 jobs:
-  build_devcontainer:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-
-    - name: Log in to registry
-      run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-
-    - name: Build devcontainer
-      uses: devcontainers/ci@v0.2
-      with:
-        imageName: ghcr.io/honigkuchen/${{ github.event.repository.name }}
-        cacheFrom: ghcr.io/honigkuchen/${{ github.event.repository.name }}
-        push: always
-
   build_cpp20:
     runs-on: ubuntu-latest
     container:
@@ -42,10 +32,10 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
     
-    # - name: Build
-    #   uses: ${{ github.repository_owner }}/${{ github.event.repository.name }}:latest
-    #   with:
-    #     runCmd: |
-    #       cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_CXX_STANDARD=20
+    - name: Build
+      uses: ${{ github.repository_owner }}/${{ github.event.repository.name }}:latest
+      with:
+        runCmd: |
+          cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_CXX_STANDARD=20
     #       cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
     #       ctest -C ${{env.BUILD_TYPE}}
