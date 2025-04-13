@@ -27,7 +27,8 @@ jobs:
     
     - name: Build
       uses: devcontainers/ci@v0.2
-      run: |
-        cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_CXX_STANDARD=20
-        cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
-        ctest -C ${{env.BUILD_TYPE}}
+      with:
+        runCmd: |
+          cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_CXX_STANDARD=20
+          cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+          ctest -C ${{env.BUILD_TYPE}}
