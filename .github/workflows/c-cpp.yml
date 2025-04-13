@@ -29,6 +29,7 @@ jobs:
       uses: devcontainers/ci@v0.2
       with:
         imageName: ghcr.io/honigkuchen/${{ github.event.repository.name }}
+        cacheFrom: ghcr.io/honigkuchen/${{ github.event.repository.name }}
         push: always
 
   build_cpp20:
