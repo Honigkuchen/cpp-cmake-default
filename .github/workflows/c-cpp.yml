@@ -25,13 +25,13 @@ jobs:
     - name: Build devcontainer
       uses: devcontainers/ci@v0.2
       with:
-        imageName: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}
+        imageName: ghcr.io/honigkuchen/${{ github.event.repository.name }}
         push: always
 
   build_cpp20:
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}
+      image: ghcr.io/honigkuchen/${{ github.event.repository.name }}
       options: --user root
 
     steps:
