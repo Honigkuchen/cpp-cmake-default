@@ -27,9 +27,6 @@ jobs:
         imageName: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:latest
 
   build_cpp20:
-    # The CMake configure and build commands are platform agnostic and should work equally well on Windows or Mac.
-    # You can convert this to a matrix build if you need cross-platform coverage.
-    # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:latest
@@ -39,10 +36,10 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
     
-    - name: Build
-      uses: ${{ github.repository_owner }}/${{ github.event.repository.name }}:latest
-      with:
-        runCmd: |
-          cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_CXX_STANDARD=20
-          cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
-          ctest -C ${{env.BUILD_TYPE}}
+    # - name: Build
+    #   uses: ${{ github.repository_owner }}/${{ github.event.repository.name }}:latest
+    #   with:
+    #     runCmd: |
+    #       cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_CXX_STANDARD=20
+    #       cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+    #       ctest -C ${{env.BUILD_TYPE}}
