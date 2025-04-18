@@ -3,21 +3,11 @@
 name: Build C++
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - "CMakeLists.txt"
-      - "**/*.cpp"
-      - "**/*.h"
-      - "**/*.hpp"
-      - "**/*.cxx"
-      - "**/*.c"
-      - ".github/workflows/build_and_test.yml"
-      - "CMakePresets.json"
-  pull_request:
-    branches:
-      - main
+  workflow_call:
+    inputs:
+      CPP_STANDARD:
+        required: true
+        type: string
 
 env:
   BUILD_TYPE: Release
