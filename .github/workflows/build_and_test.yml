@@ -51,14 +51,20 @@ jobs:
             --output-junit junit_result.xml \
             --output-on-failure
 
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        with:
+          name: Test results
+          path: ${{env.BUILD_DIR}}/test/junit_result.xml
+
       - name: Benchmark
         run: |
-          ${{env.BUILD_DIR}}/test/cpp-cmake-default_benchmark --v=2
+          ${{env.BUILD_DIR}}/benchmark/cpp-cmake-default_benchmark --v=2
 
       - name: Benchmark to file
         run: |
-          ${{env.BUILD_DIR}}/test/cpp-cmake-default_benchmark \
-            --benchmark_out=${{env.BUILD_DIR}}/test/benchmark.json \
+          ${{env.BUILD_DIR}}/benchmark/cpp-cmake-default_benchmark \
+            --benchmark_out=${{env.BUILD_DIR}}/benchmark/benchmark.json \
             --benchmark_out_format=json \
             --v=2
       
@@ -66,4 +72,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Benchmark results
-          path: ${{env.BUILD_DIR}}/test/benchmark.json
+          path: ${{env.BUILD_DIR}}/benchmark/benchmark.json
