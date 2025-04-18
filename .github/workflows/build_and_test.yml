@@ -7,21 +7,22 @@ on:
     branches:
       - main
     paths:
-    - 'CMakeLists.txt'
-    - '**/*.cpp'
-    - '**/*.h'
-    - '**/*.hpp'
-    - '**/*.cxx'
-    - '**/*.c'
-    - '.github/workflows/c-cpp.yml'
+      - "CMakeLists.txt"
+      - "**/*.cpp"
+      - "**/*.h"
+      - "**/*.hpp"
+      - "**/*.cxx"
+      - "**/*.c"
+      - ".github/workflows/build_and_test.yml"
   pull_request:
     branches:
       - main
-  
+
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
   BUILD_TYPE: Release
-
+  BUILD_DIR: ${{github.workspace}}/build
+  CPP_STANDARD: 20
 jobs:
   build_cpp20:
     runs-on: ubuntu-latest
@@ -30,11 +31,16 @@ jobs:
       options: --user root
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-    
-    - name: Build
-      run: |
-        cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_CXX_STANDARD=20
-        cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
-        ctest -C ${{env.BUILD_TYPE}}
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build
+        run: |
+          cmake -B ${{env.BUILD_DIR}} \
+            -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} \
+            -DCMAKE_CXX_STANDARD=${{env.CPP_STANDARD}}
+          cmake --build ${{env.BUILD_DIR}} --config ${{env.BUILD_TYPE}}
+
+      - name: Test
+        run: |
+          ctest -C ${{env.BUILD_TYPE}}
