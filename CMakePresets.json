@@ -11,13 +11,12 @@
             "displayName": "Makefile Config",
             "description": "Configuration using Unix Makefile generator",
             "generator": "Unix Makefiles",
-            "binaryDir": "${sourceDir}/build/"
+            "binaryDir": "$env{HOME}/build/"
         }
     ],
     "buildPresets": [
         {
             "name": "MakefileBuildPreset",
-            "jobs": 4,
             "configurePreset": "MakefileConfigurationPreset",
             "displayName": "Makefile Build",
             "description": "Build using Unix Makefile generator"
