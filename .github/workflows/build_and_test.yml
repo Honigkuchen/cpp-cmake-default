@@ -43,8 +43,6 @@ jobs:
 
       - name: Test
         run: |
-          ls -alsh ${{env.BUILD_DIR}}
-          ls -alsh ${{env.BUILD_DIR}}/test
           ctest \
             -C ${{env.BUILD_TYPE}} \
             --test-dir ${{env.BUILD_DIR}}/test \
@@ -67,6 +65,7 @@ jobs:
             --benchmark_out=${{env.BUILD_DIR}}/benchmark/benchmark.json \
             --benchmark_out_format=json \
             --v=2
+          ls -alsh ${{env.BUILD_DIR}}/benchmark/
       
       - name: Upload benchmark results
         uses: actions/upload-artifact@v4
