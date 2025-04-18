@@ -36,11 +36,30 @@ jobs:
 
       - name: Build
         run: |
-          cmake -B ${{env.BUILD_DIR}} \
-            -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} \
-            -DCMAKE_CXX_STANDARD=${{env.CPP_STANDARD}}
-          cmake --build ${{env.BUILD_DIR}} --config ${{env.BUILD_TYPE}}
+          cmake --preset MakefileConfigurationPreset
+          cmake --build --preset MakefileBuildPreset
 
       - name: Test
         run: |
-          ctest -C ${{env.BUILD_TYPE}}
+          ctest \
+            -C ${{env.BUILD_TYPE}} \
+            --test-dir ${{env.BUILD_DIR}}/test \
+            --output-junit junit_result.xml \
+            --output-on-failure
+
+      - name: Benchmark
+        run: |
+          ${{env.BUILD_DIR}}/test/cpp-cmake-default_benchmark --v=2
+
+      - name: Benchmark to file
+        run: |
+          ${{env.BUILD_DIR}}/test/cpp-cmake-default_benchmark \
+            --benchmark_out=${{env.BUILD_DIR}}/test/benchmark.json \
+            --benchmark_out_format=json \
+            --v=2
+      
+      - name: Upload benchmark results
+        uses: actions/upload-artifact@v4
+        with:
+          name: Benchmark results
+          path: ${{env.BUILD_DIR}}/test/benchmark.json

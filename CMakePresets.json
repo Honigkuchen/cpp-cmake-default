@@ -1,0 +1,26 @@
+{
+    "version": 3,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 22,
+        "patch": 1
+    },
+    "configurePresets": [
+        {
+            "name": "MakefileConfigurationPreset",
+            "displayName": "Makefile Config",
+            "description": "Configuration using Unix Makefile generator",
+            "generator": "Unix Makefiles",
+            "binaryDir": "${sourceDir}/build/"
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "MakefileBuildPreset",
+            "jobs": 4,
+            "configurePreset": "MakefileConfigurationPreset",
+            "displayName": "Makefile Build",
+            "description": "Build using Unix Makefile generator"
+        }
+    ]
+}
