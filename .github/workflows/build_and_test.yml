@@ -21,8 +21,10 @@ on:
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
   BUILD_TYPE: Release
-  BUILD_DIR: ${{github.workspace}}/build
+  # BUILD_DIR: ${{github.workspace}}/build
+  BUILD_DIR: ~/build
   CPP_STANDARD: 20
+  
 jobs:
   build_cpp20:
     runs-on: ubuntu-latest
