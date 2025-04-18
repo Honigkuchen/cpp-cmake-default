@@ -20,9 +20,7 @@ on:
       - main
 
 env:
-  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
   BUILD_TYPE: Release
-  # BUILD_DIR: ${{github.workspace}}/build
   BUILD_DIR: /tmp/build
   CPP_STANDARD: 20
 
@@ -50,7 +48,6 @@ jobs:
             --test-dir test \
             --output-junit junit_result.xml \
             --output-on-failure
-          ls -alsh ${{env.BUILD_DIR}}/test/
 
       - name: Upload test results
         uses: actions/upload-artifact@v4
