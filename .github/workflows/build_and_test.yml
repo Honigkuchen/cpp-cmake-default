@@ -41,6 +41,8 @@ jobs:
 
       - name: Test
         run: |
+          ls -alsh ${{env.BUILD_DIR}}
+          ls -alsh ${{env.BUILD_DIR}}/test
           ctest \
             -C ${{env.BUILD_TYPE}} \
             --test-dir ${{env.BUILD_DIR}}/test \
