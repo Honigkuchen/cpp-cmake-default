@@ -22,7 +22,7 @@ env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
   BUILD_TYPE: Release
   # BUILD_DIR: ${{github.workspace}}/build
-  BUILD_DIR: ${HOME}/build
+  BUILD_DIR: /tmp/build
   CPP_STANDARD: 20
 
 jobs:
