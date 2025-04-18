@@ -2,7 +2,7 @@
 #include <fmt/core.h>
 
 // Project includes
-#include <example.hpp>
+#include <cpp_cmake_default/example.hpp>
 
 int main()
 {

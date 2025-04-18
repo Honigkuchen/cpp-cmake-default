@@ -7,6 +7,8 @@ project(
 find_package(fmt REQUIRED)
 
 option(TESTING_ENABLED "Enable testing" ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 add_executable(${PROJECT_NAME} src/main.cpp)
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 20)
 target_include_directories(${PROJECT_NAME} PRIVATE include)
