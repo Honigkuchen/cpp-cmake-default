@@ -42,12 +42,14 @@ jobs:
           cmake --build --preset GithubMakefileBuildPreset
 
       - name: Test
+        working-directory: ${{env.BUILD_DIR}}
         run: |
           ctest \
             -C ${{env.BUILD_TYPE}} \
-            --test-dir ${{env.BUILD_DIR}}/test \
+            --test-dir test \
             --output-junit junit_result.xml \
             --output-on-failure
+          ls -alsh ${{env.BUILD_DIR}}/test/
 
       - name: Upload test results
         uses: actions/upload-artifact@v4
