@@ -54,6 +54,7 @@ jobs:
         with:
           name: Test results
           path: ${{env.BUILD_DIR}}/test/junit_result.xml
+          if-no-files-found: error
 
       - name: Benchmark
         run: |
@@ -72,3 +73,4 @@ jobs:
         with:
           name: Benchmark results
           path: ${{env.BUILD_DIR}}/benchmark/benchmark.json
+          if-no-files-found: error
