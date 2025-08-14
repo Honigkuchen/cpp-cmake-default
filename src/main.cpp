@@ -6,6 +6,6 @@
 
 int main()
 {
-  fmt::print("{}\n", cpp_cmake_default::hello_world());
+  fmt::print("{}\n", cpp_cmake_default::HelloWorld());
   return 0;
 }

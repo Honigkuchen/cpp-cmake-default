@@ -5,9 +5,12 @@
 // STL includes
 #include <string_view>
 
+// Project includes
+#include "defines.hpp"
+
 namespace cpp_cmake_default
 {
-[[nodiscard]] constexpr std::string_view hello_world() noexcept
+CCD_NODISCARD CCD_CONSTEXPR std::string_view HelloWorld() CCD_NOEXCEPT
 {
   return "Hello World!";
 }
