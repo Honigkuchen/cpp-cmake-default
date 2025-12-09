@@ -1,25 +1,23 @@
-ARG BASE=mcr.microsoft.com/devcontainers/cpp:1-ubuntu-22.04
+ARG BASE=mcr.microsoft.com/devcontainers/cpp:1-ubuntu-24.04
 FROM $BASE
 
-RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | gpg --dearmor -o /etc/apt/trusted.gpg.d/llvm-archive-keyring.gpg \ 
-    && echo "deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy-20 main" > /etc/apt/sources.list.d/llvm.list \
+RUN apt update && apt install -y lsb-release wget software-properties-common gnupg
+RUN wget https://apt.llvm.org/llvm.sh \
+    && chmod u+x llvm.sh \
+    && ./llvm.sh 20 \
     && apt-get update \
-    && apt-get upgrade -y \ 
-    && apt-get install -y --no-install-recommends \
-    clang-20 \
-    clangd-20 \
-    clang-tidy-20 \
-    libclang-20-dev \
-    clang-tools-20 \
+    && apt-get upgrade -y \
+    && apt install -y \
     clang-format-20 \
-    libstdc++-12-dev \
-    libc++-12-dev \
-    libc++abi-12-dev \
+    libstdc++-14-dev \
     libfmt-dev \
     libgtest-dev \
     libbenchmark-dev \
     cmake-format \
     cmake-curses-gui \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && rm llvm.sh \
+    && sudo update-alternatives --install /usr/bin/cc cc /usr/bin/clang-20 100 \
+    && sudo update-alternatives --install /usr/bin/c++ c++ /usr/bin/clang++-20 100
 
 ENTRYPOINT [ "bash" ]
